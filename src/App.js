@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { client } from "./bot";
+import BadWords from "./data/badwords.json";
+import Commands from "./data/commands.json";
+import TimedMessages from "./data/TimedMessages.json";
 
-function App() {
+const App = () => {
+  const [messages, setMessages] = useState([]);
+
+  client.on("chat", (channel, userState, message, self) => {
+    let username = userState.username;
+    let newMessage = { username, message };
+    setMessages([...messages, newMessage]);
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {messages.map((message) => (
+        <li>{`${message.username} : ${message.message}`}</li>
+      ))}
     </div>
   );
-}
+};
 
 export default App;
