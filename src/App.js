@@ -4,6 +4,7 @@ import BadWords from "./data/badwords.json";
 import Commands from "./data/commands.json";
 import TimedMessages from "./data/TimedMessages.json";
 import "./App.css";
+import NavBar from "./NavBar";
 
 const App = () => {
   const [messages, setMessages] = useState([]);
@@ -16,13 +17,16 @@ const App = () => {
   });
 
   return (
-    <div className="fluid-container bg-black text-white">
-      <div className="m-5">
-        <ul className="list-unstyled">
-          {messages.map((message, id) => (
-            <li key={id}>{`${message.username} : ${message.message}`}</li>
-          ))}
-        </ul>
+    <div>
+      <NavBar />
+      <div className="fluid-container bg-black text-white">
+        <div className="m-5">
+          <ul className="list-unstyled">
+            {messages.map((message, id) => (
+              <li key={id}>{`${message.username} : ${message.message}`}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
