@@ -17,9 +17,9 @@ const App = () => {
   });
 
   return (
-    <div>
+    <div className="bg-black text-white">
       <NavBar />
-      <div className="fluid-container bg-black text-white">
+      <div className="fluid-container">
         <div className="m-5">
           <ul className="list-unstyled">
             {messages.map((message, id) => (
