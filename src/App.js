@@ -1,34 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { client } from "./bot";
-import BadWords from "./data/badwords.json";
-import Commands from "./data/commands.json";
-import TimedMessages from "./data/TimedMessages.json";
-import "./App.css";
-import NavBar from "./NavBar";
+import React from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Home from "./Home";
+import Chat from "./Chat";
 
 const App = () => {
-  const [messages, setMessages] = useState([]);
-
-  client.on("chat", (channel, userState, message, self) => {
-    let username = userState.username;
-    let newMessage = { username, message };
-    setMessages([...messages, newMessage]);
-    console.log(userState);
-  });
-
   return (
-    <div className="bg-black text-white">
-      <NavBar />
-      <div className="fluid-container">
-        <div className="m-5">
-          <ul className="list-unstyled">
-            {messages.map((message, id) => (
-              <li key={id}>{`${message.username} : ${message.message}`}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />}>
+          <Route path="chat" element={<Chat />}></Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
