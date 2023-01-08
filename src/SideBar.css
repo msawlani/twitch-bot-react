@@ -1,0 +1,18 @@
+.main-nav {
+  color: white;
+  text-decoration: none;
+}
+
+.main-nav:hover {
+  color: black !important;
+  text-decoration: none;
+}
+
+.active {
+  color: #000;
+  text-decoration: none;
+}
+.active:hover {
+  color: black !important;
+  text-decoration: none;
+}

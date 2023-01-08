@@ -1,0 +1,20 @@
+{
+    "Links": [
+        {
+            "name": "chat",
+            "link": "/"
+        },
+        {
+            "name": "commands",
+            "link": "/commands"
+        },
+        {
+            "name": "timed messages",
+            "link": "/timed_messages"
+        },
+        {
+            "name": "Settings",
+            "link": "/settings"
+        }
+    ]
+}
