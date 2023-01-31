@@ -11,7 +11,7 @@ const Chat = () => {
     console.log(userState);
   });
   return (
-    <div className="h-50 bg-secondary">
+    <div className="container p-5">
       <ul className="list-unstyled">
         {messages.map((message, id) => (
           <li key={id}>{`${message.username} : ${message.message}`}</li>
