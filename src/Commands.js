@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import commands from "./data/commands.json";
 import { Form, Button, FormCheck, FormControl } from "react-bootstrap";
 import { client } from "./bot.js";
+import { config } from "./Constants";
+
+const url = config.url;
 
 const Commands = () => {
   const [commands, setCommands] = useState([]);
@@ -12,7 +15,7 @@ const Commands = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:3001/commands")
+    fetch(`${url}commands`)
       .then((res) => res.json())
       .then((data) => {
         setCommands(data);
@@ -30,7 +33,7 @@ const Commands = () => {
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newCommand = { ...form };
 
-    await fetch("http://localhost:3001/commands", {
+    await fetch(`${url}commands`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
