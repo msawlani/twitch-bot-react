@@ -15,7 +15,7 @@ const Commands = () => {
   });
 
   useEffect(() => {
-    fetch(`${url}commands`)
+    fetch(`${url}/commands`)
       .then((res) => res.json())
       .then((data) => {
         setCommands(data);
@@ -33,7 +33,7 @@ const Commands = () => {
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newCommand = { ...form };
 
-    await fetch(`${url}commands`, {
+    await fetch(`${url}/commands`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
