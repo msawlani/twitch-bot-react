@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import commands from "./data/commands.json";
-import { Form, Button, FormCheck, FormControl } from "react-bootstrap";
+import { Form, Button, FormCheck, FormControl, Modal } from "react-bootstrap";
 import { client } from "./bot.js";
 import { config } from "./Constants";
+import EditCommand from "./EditCommand";
 
 const url = config.url;
 
@@ -15,7 +16,7 @@ const Commands = () => {
   });
 
   useEffect(() => {
-    fetch(`${url}commands`)
+    fetch(`${url}/commands`)
       .then((res) => res.json())
       .then((data) => {
         setCommands(data);
@@ -28,34 +29,54 @@ const Commands = () => {
     });
   }
 
+  async function deleteCommand(e, id) {
+    // When a post request is sent to the create url, we'll add a new record to the database.
+    await fetch(`${url}/commands/${id}`, { method: "DELETE" }).catch((err) => {
+      alert(err);
+    });
+  }
+
   // This function will handle the submission.
   async function onSubmit(e) {
+    const command = { ...form };
     // When a post request is sent to the create url, we'll add a new record to the database.
-    const newCommand = { ...form };
 
-    await fetch(`${url}commands`, {
+    await fetch(`${url}/commands`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newCommand),
+      body: JSON.stringify(command),
     }).catch((error) => {
       window.alert(error);
       return;
     });
-
-    setForm({ command: "", active: true, message: "" });
-    console.log(newCommand);
+    console.log(command);
   }
 
   return (
     <div className="container bg-secondary">
       <div className="row p-5">
         <div className="col-sm-6">
-          <Button>Plus</Button>
+          <div className="float-right">
+            <Button>Plus</Button>
+          </div>
+
           <ul className="list-unstyled">
             {commands.map((command) => (
-              <li>{command.command}</li>
+              <div className="row p-1">
+                <div className="col-12 col-sm-6">
+                  <li>{command.command}</li>
+                </div>
+                <div className="col-12 col-sm-6">
+                  <div className="d-flex justify-content-evenly">
+                    <EditCommand command={command}></EditCommand>
+                    <Button onClick={(e) => deleteCommand(e, command._id)}>
+                      Delete
+                    </Button>
+                  </div>
+                </div>
+              </div>
             ))}
           </ul>
         </div>
