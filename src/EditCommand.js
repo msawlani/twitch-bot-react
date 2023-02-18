@@ -30,10 +30,10 @@ const Commands = (props) => {
     });
   }
 
-  async function save(id) {
+  async function save() {
     const command = { ...form };
-    console.log(id);
-    await fetch(`${url}/commands/${id}`, {
+    console.log(command.command);
+    await fetch(`${url}/commands/${command.command}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(command),
