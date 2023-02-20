@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import commands from "./data/commands.json";
 import { Form, Button, FormCheck, FormControl, Modal } from "react-bootstrap";
 import { client } from "./bot.js";
@@ -9,11 +9,8 @@ const url = config.url;
 
 const Commands = () => {
   const [commands, setCommands] = useState([]);
-  const [form, setForm] = useState({
-    command: "",
-    active: Boolean,
-    message: "",
-  });
+  const messageRef = useRef();
+  const commandRef = useRef();
 
   useEffect(() => {
     fetch(`${url}/commands`)
@@ -22,13 +19,6 @@ const Commands = () => {
         setCommands(data);
       });
   });
-
-  function UpdateForm(value) {
-    return setForm((prev) => {
-      return { ...prev, ...value };
-    });
-  }
-
   async function deleteCommand(e, command) {
     // When a post request is sent to the create url, we'll add a new record to the database.
     await fetch(`${url}/commands/${command}`, { method: "DELETE" }).catch(
@@ -40,7 +30,11 @@ const Commands = () => {
 
   // This function will handle the submission.
   async function onSubmit(e) {
-    const command = { ...form };
+    const command = {
+      command: commandRef.current.value,
+      active: true,
+      message: messageRef.current.value,
+    };
     // When a post request is sent to the create url, we'll add a new record to the database.
 
     await fetch(`${url}/commands`, {
@@ -89,8 +83,7 @@ const Commands = () => {
             <FormControl
               placeholder="Name"
               type="text"
-              value={form.command}
-              onChange={(e) => UpdateForm({ command: e.target.value })}
+              ref={commandRef}
             ></FormControl>
             <FormCheck label="Mod & Up"></FormCheck>
             <FormControl placeholder="Cooldown in seconds"></FormControl>
@@ -98,8 +91,7 @@ const Commands = () => {
               as="textarea"
               placeholder="Message"
               type="text"
-              value={form.message}
-              onChange={(e) => UpdateForm({ message: e.target.value })}
+              ref={messageRef}
             ></FormControl>
             <Button type="submit">Save</Button>
           </Form>
