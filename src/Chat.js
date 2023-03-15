@@ -17,12 +17,6 @@ const Chat = () => {
           <li key={id}>{`${message.username} : ${message.message}`}</li>
         ))}
       </ul>
-      <iframe
-        id="twitch-chat-embed"
-        src="https://www.twitch.tv/embed/sinsofaninja/chat?parent=dev.twitch.tv"
-        height="500"
-        width="350"
-      ></iframe>
     </div>
   );
 };
