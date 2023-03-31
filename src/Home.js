@@ -11,7 +11,9 @@ const Home = () => {
       <NavBar />
       <div className="w-75 h-100 d-flex flex-column justify-content-start">
         <h1 className="text-center">Twitch Chat Bot</h1>
-        <Outlet />
+        <div className="container">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

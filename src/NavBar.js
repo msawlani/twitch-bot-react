@@ -1,9 +1,19 @@
 import React from "react";
 import links from "./data/NavLinks.json";
 import { NavLink } from "react-router-dom";
+import { authenticate } from "twitch-auth";
 import "./SideBar.css";
+import { Button } from "react-bootstrap";
 
 const NavBar = () => {
+  const handleClick = () => {
+    authenticate({
+      client_id: process.env.REACT_APP_CLIENTID,
+      client_secret: process.env.REACT_APP_CLIENTSECRET,
+      redirect_uri: process.env.REACT_APP_URI,
+      scope: process.env.REACT_APP_SCOPES,
+    });
+  };
   return (
     <div className="vh-100 bg-secondary w-25">
       <div className="text-center">
@@ -22,12 +32,7 @@ const NavBar = () => {
           ))}
         </ul>
         <div className="text-center">
-          <a
-            href="https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&client_id=rgllofa4q2yeh1z61l1xt76boajucs&redirect_uri=http://localhost:3000/&scope=user_read"
-            target="_blank"
-          >
-            Login
-          </a>
+          <Button onClick={handleClick}>Login</Button>
         </div>
       </div>
     </div>
