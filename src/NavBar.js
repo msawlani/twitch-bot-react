@@ -7,12 +7,12 @@ import { Button } from "react-bootstrap";
 
 const NavBar = () => {
   const handleClick = () => {
-    authenticate({
-      client_id: process.env.REACT_APP_CLIENTID,
-      client_secret: process.env.REACT_APP_CLIENTSECRET,
-      redirect_uri: process.env.REACT_APP_URI,
-      scope: process.env.REACT_APP_SCOPES,
-    });
+    // authenticate({
+    //   client_id: process.env.REACT_APP_CLIENTID,
+    //   client_secret: process.env.REACT_APP_CLIENTSECRET,
+    //   redirect_uri: process.env.REACT_APP_URI,
+    //   scope: process.env.REACT_APP_SCOPES,
+    // });
   };
   return (
     <div className="vh-100 bg-secondary w-25">
