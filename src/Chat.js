@@ -1,35 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { client } from "./bot";
 
-const Chat = () => {
-  const [chat, setChat] = useState([]);
+const Chat = ({ chat, setChat }) => {
   const [messages, setMessages] = useState("");
 
   console.log(chat);
-
-  useEffect(() => {
-    const savedChat = localStorage.getItem("chat");
-
-    if (savedChat) {
-      setChat(JSON.parse(savedChat));
-      console.log(savedChat);
-    }
-    client.on("message", (channel, context, msg) => {
-      const color = context.color;
-      const newChat = {
-        user: context.username,
-        text: msg,
-        color,
-      };
-      setChat((prevChat) => {
-        const updatedChat = [...prevChat, newChat];
-        localStorage.setItem("chat", JSON.stringify(updatedChat));
-        return updatedChat;
-      });
-
-      console.log(savedChat);
-    });
-  }, []);
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -38,6 +13,11 @@ const Chat = () => {
     }
     client.say("sinsofaninja", messages);
     setMessages("");
+  };
+
+  const clearChat = () => {
+    setChat([]);
+    localStorage.setItem("chat", JSON.stringify([]));
   };
 
   return (
@@ -58,6 +38,9 @@ const Chat = () => {
           onChange={(e) => setMessages(e.target.value)}
         />
         <button type="submit">Send</button>
+        <button onClick={clearChat} type="button">
+          Clear
+        </button>
       </form>
     </div>
   );
