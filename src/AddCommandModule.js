@@ -10,6 +10,7 @@ const AddCommands = () => {
   const [adding, setAdding] = useState(false);
   const messageRef = useRef();
   const commandRef = useRef();
+  const modandupRef = useRef(false);
 
   const handleClose = () => setAdding(false);
   const handleShow = () => {
@@ -19,6 +20,7 @@ const AddCommands = () => {
   async function onSubmit() {
     const command = {
       command: commandRef.current.value,
+      modandup: modandupRef.current.checked,
       active: true,
       message: messageRef.current.value,
     };
@@ -34,6 +36,7 @@ const AddCommands = () => {
       window.alert(error);
       return;
     });
+    client.say("sinsofaninja", command.command + " command has been added!");
     setAdding(false);
     console.log(command);
   }
@@ -52,7 +55,11 @@ const AddCommands = () => {
               type="text"
               ref={commandRef}
             ></FormControl>
-            <FormCheck label="Mod & Up"></FormCheck>
+            <FormCheck
+              type="checkbox"
+              label="Mod & Up"
+              ref={modandupRef}
+            ></FormCheck>
             <FormControl placeholder="Cooldown in seconds"></FormControl>
             <FormControl
               as="textarea"

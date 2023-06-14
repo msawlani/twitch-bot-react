@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import commands from "./data/commands.json";
 import { Form, Button, FormCheck, FormControl, Modal } from "react-bootstrap";
 import { client } from "./bot.js";
 import { config } from "./Constants";
@@ -10,6 +9,7 @@ const Commands = (props) => {
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState({
     command: "",
+    modandup: Boolean,
     active: Boolean,
     message: "",
   });
@@ -19,6 +19,7 @@ const Commands = (props) => {
     setEditing(true);
     setForm({
       command: props.command.command,
+      modandup: props.command.modandup,
       active: props.command.active,
       message: props.command.message,
     });
@@ -38,6 +39,8 @@ const Commands = (props) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(command),
     });
+    client.say("sinsofaninja", command.command + " command has been edited!");
+
     setEditing(false);
   }
 
@@ -56,7 +59,11 @@ const Commands = (props) => {
               value={form.command}
               onChange={(e) => UpdateForm({ command: e.target.value })}
             ></FormControl>
-            <FormCheck label="Mod & Up"></FormCheck>
+            <FormCheck
+              label="Mod & Up"
+              defaultChecked={form.modandup}
+              onChange={(e) => UpdateForm({ modandup: e.target.checked })}
+            ></FormCheck>
             <FormControl placeholder="Cooldown in seconds"></FormControl>
             <FormControl
               as="textarea"
