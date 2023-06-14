@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import { config } from "./Constants";
 import EditCommand from "./EditCommand";
 import AddCommands from "./AddCommandModule";
+import { client } from "tmi.js";
 
 const url = config.url;
 
@@ -23,6 +24,7 @@ const Commands = () => {
         alert(err);
       }
     );
+    client.say("sinsofaninja", command + " command has been deleted!");
   }
 
   return (
