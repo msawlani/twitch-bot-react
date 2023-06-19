@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { client } from "./bot";
 
-const Chat = ({ chat, setChat }) => {
+const Chat = ({ chat, setChat, userData }) => {
   const [messages, setMessages] = useState("");
 
   console.log(chat);
+  console.log(userData?.display_name);
 
   const sendMessage = (e) => {
     e.preventDefault();

@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useOutletContext,
+} from "react-router-dom";
 import Home from "./Home";
 import Chat from "./Chat";
 import Commands from "./Commands";
@@ -8,8 +14,10 @@ import Settings from "./Settings";
 import { client } from "./bot";
 
 const App = () => {
+  const userData = useOutletContext();
   const [chat, setChat] = useState([]);
   const savedChat = localStorage.getItem("chat");
+  console.log(userData);
   const clearChat = () => {
     setChat([]);
   };
@@ -38,7 +46,10 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />}>
-          <Route index element={<Chat chat={chat} setChat={setChat} />} />
+          <Route
+            index
+            element={<Chat chat={chat} setChat={setChat} userData={userData} />}
+          />
           <Route path="commands" element={<Commands />} />
           <Route path="timed_messages" element={<TimedMessages />} />
           <Route path="settings" element={<Settings />} />
