@@ -31,7 +31,7 @@ const Chat = ({ chat, setChat, userData }) => {
           </div>
         ))}
       </div>
-      <form onSubmit={sendMessage}>
+      <form onSubmit={sendMessage} hidden={client.readyState() !== "OPEN"}>
         <input
           type="text"
           placeholder="Type a message"
