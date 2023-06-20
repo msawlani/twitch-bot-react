@@ -25,7 +25,7 @@ const NavBar = ({ userData }) => {
   };
 
   return (
-    <div className="vh-100 bg-secondary w-25">
+    <div className="bg-secondary sideNav">
       <div className="text-center">
         <div>
           <img src={userData?.profile_image_url} className="profileImg" />

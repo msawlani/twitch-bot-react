@@ -48,13 +48,14 @@ const Home = () => {
   }, [userData]);
 
   return (
-    <div className="vh-100 vw-100 d-flex justify-content-around bg-black text-white p-0 m-0">
-      <NavBar userData={userData} />
-      <div className="w-75 h-100 d-flex flex-column justify-content-start">
+    <div className="bg-black text-white">
+      <div className="sideNav">
+        <NavBar userData={userData} />
+      </div>
+
+      <div className="content">
         <h1 className="text-center">Twitch Chat Bot</h1>
-        <div className="container">
-          <Outlet context={userData} />
-        </div>
+        <Outlet context={userData} />
       </div>
     </div>
   );
