@@ -9,7 +9,7 @@ these are the use states that I am using for chat and setting the message
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 src/Chat.js
 ```javascript
-4      const Chat = ({ chat, setChat }) => {
+4      const Chat = ({ chat, setChat, userData }) => {
 5        const [messages, setMessages] = useState("");
 ```
 
@@ -19,44 +19,44 @@ This code will handle chat useState which will store whatever messages come into
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 src/Chat.js
 ```javascript
-10         e.preventDefault();
-11         if (messages === "") {
-12           return;
-13         }
-14         client.say("sinsofaninja", messages);
-15         setMessages("");
-16       };
-17     
-18       const clearChat = () => {
-19         setChat([]);
-20         localStorage.setItem("chat", JSON.stringify([]));
-21       };
-22     
-23       return (
-24         <div>
-25           <div className="chatWindow">
-26             {chat.map((msg, index) => (
-27               <div key={index}>
-28                 <strong style={{ color: msg.color }}>{msg.user}: </strong>
-29                 <span>{msg.text}</span>
-30               </div>
-31             ))}
-32           </div>
-33           <form onSubmit={sendMessage}>
-34             <input
-35               type="text"
-36               placeholder="Type a message"
-37               value={messages}
-38               onChange={(e) => setMessages(e.target.value)}
-39             />
-40             <button type="submit">Send</button>
-41             <button onClick={clearChat} type="button">
-42               Clear
-43             </button>
-44           </form>
-45         </div>
-46       );
-47     };
+11         e.preventDefault();
+12         if (messages === "") {
+13           return;
+14         }
+15         client.say("sinsofaninja", messages);
+16         setMessages("");
+17       };
+18     
+19       const clearChat = () => {
+20         setChat([]);
+21         localStorage.setItem("chat", JSON.stringify([]));
+22       };
+23     
+24       return (
+25         <div>
+26           <div className="chatWindow">
+27             {chat.map((msg, index) => (
+28               <div key={index}>
+29                 <strong style={{ color: msg.color }}>{msg.user}: </strong>
+30                 <span>{msg.text}</span>
+31               </div>
+32             ))}
+33           </div>
+34           <form onSubmit={sendMessage} hidden={client.readyState() !== "OPEN"}>
+35             <input
+36               type="text"
+37               placeholder="Type a message"
+38               value={messages}
+39               onChange={(e) => setMessages(e.target.value)}
+40             />
+41             <button type="submit">Send</button>
+42             <button onClick={clearChat} type="button">
+43               Clear
+44             </button>
+45           </form>
+46         </div>
+47       );
+48     };
 ```
 
 <br/>
@@ -69,14 +69,14 @@ This code handles sending messages to chat from the front end.
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 src/Chat.js
 ```javascript
-34       const sendMessage = (e) => {
-35         e.preventDefault();
-36         if (messages === "") {
-37           return;
-38         }
-39         client.say("sinsofaninja", messages);
-40         setMessages("");
-41       };
+10       const sendMessage = (e) => {
+11         e.preventDefault();
+12         if (messages === "") {
+13           return;
+14         }
+15         client.say("sinsofaninja", messages);
+16         setMessages("");
+17       };
 ```
 
 <br/>
@@ -85,28 +85,28 @@ This code snip handles the messages being displayed from useState chat and sendi
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 src/Chat.js
 ```javascript
-24         <div>
-25           <div className="chatWindow">
-26             {chat.map((msg, index) => (
-27               <div key={index}>
-28                 <strong style={{ color: msg.color }}>{msg.user}: </strong>
-29                 <span>{msg.text}</span>
-30               </div>
-31             ))}
-32           </div>
-33           <form onSubmit={sendMessage}>
-34             <input
-35               type="text"
-36               placeholder="Type a message"
-37               value={messages}
-38               onChange={(e) => setMessages(e.target.value)}
-39             />
-40             <button type="submit">Send</button>
-41             <button onClick={clearChat} type="button">
-42               Clear
-43             </button>
-44           </form>
-45         </div>
+25         <div>
+26           <div className="chatWindow">
+27             {chat.map((msg, index) => (
+28               <div key={index}>
+29                 <strong style={{ color: msg.color }}>{msg.user}: </strong>
+30                 <span>{msg.text}</span>
+31               </div>
+32             ))}
+33           </div>
+34           <form onSubmit={sendMessage} hidden={client.readyState() !== "OPEN"}>
+35             <input
+36               type="text"
+37               placeholder="Type a message"
+38               value={messages}
+39               onChange={(e) => setMessages(e.target.value)}
+40             />
+41             <button type="submit">Send</button>
+42             <button onClick={clearChat} type="button">
+43               Clear
+44             </button>
+45           </form>
+46         </div>
 ```
 
 <br/>
