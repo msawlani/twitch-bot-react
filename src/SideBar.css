@@ -16,3 +16,23 @@
   color: black !important;
   text-decoration: none;
 }
+
+.profileImg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-style: none;
+}
+
+.sideNav {
+  list-style-type: none;
+  width: 25%;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.content {
+  margin-left: 30%;
+}
