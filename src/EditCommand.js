@@ -46,7 +46,9 @@ const Commands = (props) => {
 
   return (
     <>
-      <Button onClick={handleShow}>Edit</Button>
+      <Button onClick={handleShow} disabled={client.readyState() !== "OPEN"}>
+        Edit
+      </Button>
       <Modal show={editing} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Edit</Modal.Title>

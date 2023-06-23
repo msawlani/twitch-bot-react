@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { config } from "./Constants";
 import EditCommand from "./EditCommand";
 import AddCommands from "./AddCommandModule";
-import { client } from "tmi.js";
+import { client } from "./bot";
 
 const url = config.url;
 
@@ -44,7 +44,10 @@ const Commands = () => {
               <div className="col-12 col-sm-6">
                 <div className="d-flex justify-content-evenly">
                   <EditCommand command={command}></EditCommand>
-                  <Button onClick={(e) => deleteCommand(e, command.command)}>
+                  <Button
+                    onClick={(e) => deleteCommand(e, command.command)}
+                    disabled={client.readyState() !== "OPEN"}
+                  >
                     Delete
                   </Button>
                 </div>
