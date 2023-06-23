@@ -43,7 +43,9 @@ const AddCommands = () => {
 
   return (
     <>
-      <Button onClick={handleShow}>Add</Button>
+      <Button onClick={handleShow} disabled={client.readyState() !== "OPEN"}>
+        Add
+      </Button>
       <Modal show={adding} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Create Command</Modal.Title>
