@@ -4,16 +4,19 @@
 }
 
 .main-nav:hover {
-  color: black !important;
+  color: white !important;
+  opacity: 0.5;
   text-decoration: none;
 }
 
 .active {
-  color: #000;
+  color: white !important;
+  opacity: 0.5;
   text-decoration: none;
 }
 .active:hover {
-  color: black !important;
+  color: white !important;
+  opacity: 0.5;
   text-decoration: none;
 }
 
@@ -22,17 +25,4 @@
   height: 50px;
   border-radius: 50%;
   border-style: none;
-}
-
-.sideNav {
-  list-style-type: none;
-  width: 25%;
-  background-color: #f1f1f1;
-  position: fixed;
-  height: 100%;
-  overflow: auto;
-}
-
-.content {
-  margin-left: 30%;
 }
