@@ -2,19 +2,23 @@
     "Links": [
         {
             "name": "chat",
-            "link": "/"
+            "link": "/",
+            "icon": "material-symbols:chat-outline"
         },
         {
             "name": "commands",
-            "link": "/commands"
+            "link": "/commands",
+            "icon": "ri:slash-commands-2"
         },
         {
             "name": "timed messages",
-            "link": "/timed_messages"
+            "link": "/timed_messages",
+            "icon": "ion:timer-outline"
         },
         {
             "name": "Settings",
-            "link": "/settings"
+            "link": "/settings",
+            "icon": "material-symbols:settings-outline"
         }
     ]
 }

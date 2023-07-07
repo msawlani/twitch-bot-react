@@ -48,14 +48,13 @@ const Home = () => {
   }, [userData]);
 
   return (
-    <div className="bg-black text-white">
-      <div className="sideNav">
+    <div className="bg-black text-white container-fluid">
+      <div className="row">
         <NavBar userData={userData} />
-      </div>
-
-      <div className="content">
-        <h1 className="text-center">Twitch Chat Bot</h1>
-        <Outlet context={userData} />
+        <div className="col">
+          <h1 className="text-center">Twitch Chat Bot</h1>
+          <Outlet context={userData} />
+        </div>
       </div>
     </div>
   );

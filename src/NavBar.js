@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import links from "./data/NavLinks.json";
 import { NavLink } from "react-router-dom";
 import "./SideBar.css";
-import { Button } from "react-bootstrap";
+import { Navbar, Nav, NavItem, Button, Glyphicon } from "react-bootstrap";
+import { Icon } from "@iconify/react";
 
 const NavBar = ({ userData }) => {
   function generateRandomString(length) {
@@ -20,35 +21,48 @@ const NavBar = ({ userData }) => {
     window.location.href = authUrl;
   }
 
-  const handleClick = () => {
-    redirectToTwitchAuth();
+  const [visible, setVisible] = useState(false);
+
+  const handleClick = () => {};
+
+  const showSideNav = () => {
+    setVisible(!visible);
   };
 
   return (
-    <div className="bg-secondary sideNav">
-      <div className="text-center">
-        <div>
-          <img src={userData?.profile_image_url} className="profileImg" />
-          <h4>{userData?.display_name}</h4>
-        </div>
+    <nav className="d-flex flex-column flex-shrink-0 col-auto p-3 bg-dark vh-100 align-items-center ">
+      <div>
+        <img src={userData?.profile_image_url} className="profileImg" />
+        <span className="ms-1 d-none d-sm-inline">
+          {userData?.display_name}
+        </span>
+      </div>
 
-        <ul className=" list-unstyled">
+      <div>
+        <ul className="list-unstyled flex-sm-column navbar-nav w-100 pb-3 pt-3 gap-3 justify-content-between">
           {links.Links.map((link, id) => (
             <li>
               <NavLink
-                className={({ isActive }) => (isActive ? "active" : "main-nav")}
+                className={({ isActive }) =>
+                  isActive ? "active pl-0 px-3" : "main-nav pl-0 px-3"
+                }
                 to={link.link}
               >
-                {link.name}
+                <Icon icon={link.icon} width="30" height="30" />
+                <span className="ms-1 d-none d-sm-inline">{link.name}</span>
               </NavLink>
             </li>
           ))}
         </ul>
-        <div className="text-center">
-          <Button onClick={handleClick}>Login</Button>
-        </div>
       </div>
-    </div>
+
+      <div className="d-flex justify-content-center">
+        <Button onClick={handleClick}>
+          <Icon icon="material-symbols:login" width="30" height="30" />
+          <span className="ms-1 d-none d-sm-inline">Login</span>
+        </Button>
+      </div>
+    </nav>
   );
 };
 
