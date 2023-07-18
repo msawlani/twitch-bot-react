@@ -1,17 +1,17 @@
 {
     "Links": [
         {
-            "name": "chat",
+            "name": "Chat",
             "link": "/",
             "icon": "material-symbols:chat-outline"
         },
         {
-            "name": "commands",
+            "name": "Commands",
             "link": "/commands",
             "icon": "ri:slash-commands-2"
         },
         {
-            "name": "timed messages",
+            "name": "Timed Messages",
             "link": "/timed_messages",
             "icon": "ion:timer-outline"
         },
