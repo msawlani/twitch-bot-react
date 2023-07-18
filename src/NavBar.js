@@ -12,7 +12,9 @@ const NavBar = ({ userData }) => {
       .substring(2, length + 2);
   }
   const clientId = process.env.REACT_APP_STREAMER_CLIENT_ID;
-  const redirectUri = encodeURIComponent("http://localhost:3000");
+  const redirectUri = encodeURIComponent(
+    "https://ninjashideout-twitch-bot.onrender.com/"
+  );
   const responseType = "token";
   const scope = "user%3Aread%3Aemail+chat%3Aedit+chat%3Aread";
   const state = encodeURIComponent(generateRandomString(10));
