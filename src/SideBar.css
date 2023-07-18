@@ -4,15 +4,25 @@
 }
 
 .main-nav:hover {
-  color: black !important;
+  color: white !important;
+  opacity: 0.5;
   text-decoration: none;
 }
 
 .active {
-  color: #000;
+  color: white !important;
+  opacity: 0.5;
   text-decoration: none;
 }
 .active:hover {
-  color: black !important;
+  color: white !important;
+  opacity: 0.5;
   text-decoration: none;
+}
+
+.profileImg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-style: none;
 }

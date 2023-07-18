@@ -1,28 +1,73 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { client } from "./bot";
 
-const Chat = () => {
-  const [messages, setMessages] = useState([]);
+const Chat = ({ chat, setChat, userData }) => {
+  const [messages, setMessages] = useState("");
 
-  client.on("chat", (channel, userState, message, self) => {
-    let username = userState.username;
-    let newMessage = { username, message };
-    setMessages([...messages, newMessage]);
-    console.log(userState);
-  });
+  console.log(chat);
+  console.log(userData?.display_name);
+
+  const sendMessage = (e) => {
+    e.preventDefault();
+    if (messages === "") {
+      return;
+    }
+    client.say("sinsofaninja", messages);
+    setMessages("");
+  };
+
+  const clearChat = () => {
+    setChat([]);
+    localStorage.setItem("chat", JSON.stringify([]));
+  };
+
   return (
-    <div className="container p-5">
-      <ul className="list-unstyled">
-        {messages.map((message, id) => (
-          <li key={id}>{`${message.username} : ${message.message}`}</li>
-        ))}
-      </ul>
-      <iframe
-        id="twitch-chat-embed"
-        src="https://www.twitch.tv/embed/sinsofaninja/chat?parent=dev.twitch.tv"
-        height="500"
-        width="350"
-      ></iframe>
+    <div className="container">
+      <div className="row">
+        <div className="col-12 col-md-9">
+          <iframe
+            src="https://player.twitch.tv/?channel=sinsofaninja&parent=localhost&autoplay=true&muted=true"
+            height="1000"
+            width="850"
+            frameborder="0"
+            scrolling="no"
+            allowfullscreen="true"
+          ></iframe>
+        </div>
+
+        <div className="chatWindow col-12 col-md-3">
+          {chat.map((msg, index) => (
+            <div key={index}>
+              <strong style={{ color: msg.color }}>{msg.user}: </strong>
+              <span>{msg.text}</span>
+            </div>
+          ))}
+          <form onSubmit={sendMessage} hidden={client.readyState() !== "OPEN"}>
+            <div className="form-group">
+              <input
+                className="form-control form-control-sm"
+                type="text"
+                placeholder="Type a message"
+                value={messages}
+                onChange={(e) => setMessages(e.target.value)}
+              />
+            </div>
+
+            <div className="d-flex justify-content-center">
+              <button className="btn btn-primary" type="submit">
+                Send
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={clearChat}
+                type="button"
+              >
+                Clear
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

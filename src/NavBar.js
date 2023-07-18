@@ -1,36 +1,64 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import links from "./data/NavLinks.json";
 import { NavLink } from "react-router-dom";
 import "./SideBar.css";
+import { Navbar, Nav, NavItem, Button, Glyphicon } from "react-bootstrap";
+import { Icon } from "@iconify/react";
 
-const NavBar = () => {
+const NavBar = ({ userData }) => {
+  function generateRandomString(length) {
+    return Math.random()
+      .toString(36)
+      .substring(2, length + 2);
+  }
+  const clientId = process.env.REACT_APP_STREAMER_CLIENT_ID;
+  const redirectUri = encodeURIComponent("http://localhost:3000");
+  const responseType = "token";
+  const scope = "user%3Aread%3Aemail+chat%3Aedit+chat%3Aread";
+  const state = encodeURIComponent(generateRandomString(10));
+  function redirectToTwitchAuth() {
+    const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}&state=${state}`;
+    window.location.href = authUrl;
+  }
+
+  const handleClick = () => {
+    redirectToTwitchAuth();
+  };
+
   return (
-    <div className="vh-100 bg-secondary w-25">
-      <div className="text-center">
-        <span>Picture</span>
+    <nav className="d-flex flex-column flex-shrink-0 col-auto p-3 bg-dark vh-100 align-items-center ">
+      <div>
+        <img src={userData?.profile_image_url} className="profileImg" />
+        <span className="ms-1 d-none d-sm-inline">
+          {userData?.display_name}
+        </span>
+      </div>
 
-        <ul className=" list-unstyled">
+      <div>
+        <ul className="list-unstyled flex-sm-column navbar-nav w-100 pb-3 pt-3 gap-3 justify-content-between">
           {links.Links.map((link, id) => (
             <li>
               <NavLink
-                className={({ isActive }) => (isActive ? "active" : "main-nav")}
+                className={({ isActive }) =>
+                  isActive ? "active pl-0 px-3" : "main-nav pl-0 px-3"
+                }
                 to={link.link}
               >
-                {link.name}
+                <Icon icon={link.icon} width="30" height="30" />
+                <span className="ms-1 d-none d-sm-inline">{link.name}</span>
               </NavLink>
             </li>
           ))}
         </ul>
-        <div className="text-center">
-          <a
-            href="https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&client_id=rgllofa4q2yeh1z61l1xt76boajucs&redirect_uri=http://localhost:3000/&scope=user_read"
-            target="_blank"
-          >
-            Login
-          </a>
-        </div>
       </div>
-    </div>
+
+      <div className="d-flex justify-content-center">
+        <Button onClick={handleClick}>
+          <Icon icon="material-symbols:login" width="30" height="30" />
+          <span className="ms-1 d-none d-sm-inline">Login</span>
+        </Button>
+      </div>
+    </nav>
   );
 };
 
