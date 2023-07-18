@@ -21,12 +21,8 @@ const NavBar = ({ userData }) => {
     window.location.href = authUrl;
   }
 
-  const [visible, setVisible] = useState(false);
-
-  const handleClick = () => {};
-
-  const showSideNav = () => {
-    setVisible(!visible);
+  const handleClick = () => {
+    redirectToTwitchAuth();
   };
 
   return (
