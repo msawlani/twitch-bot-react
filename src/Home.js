@@ -41,6 +41,7 @@ const Home = () => {
     console.log(accessToken);
     if (accessToken) {
       fetchUserInfo(accessToken).then((userInfo) => {
+        console.log(userInfo);
         localStorage.setItem("userData", JSON.stringify(userInfo));
         console.log(userData);
       });
