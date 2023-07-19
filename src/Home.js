@@ -21,11 +21,14 @@ const Home = () => {
   }
 
   async function fetchUserInfo(accessToken) {
-    const response = await fetch("http://localhost:3001/api/users", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_FETCH_USER_URL}/api/users`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
 
     if (response.ok) {
       const data = await response.json();
