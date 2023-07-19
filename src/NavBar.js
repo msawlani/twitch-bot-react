@@ -27,6 +27,8 @@ const NavBar = ({ userData }) => {
     redirectToTwitchAuth();
   };
 
+  console.log(userData);
+
   return (
     <nav className="d-flex flex-column flex-shrink-0 col-auto p-3 bg-dark vh-100 align-items-center ">
       <div>
