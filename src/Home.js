@@ -21,7 +21,7 @@ const Home = () => {
   }
 
   async function fetchUserInfo(accessToken) {
-    const response = await fetch("http://localhost:3001/api/users", {
+    const response = await fetch("api/users", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

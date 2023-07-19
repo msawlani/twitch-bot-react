@@ -10,6 +10,8 @@ const url = config.url;
 const Commands = () => {
   const [commands, setCommands] = useState([]);
 
+  console.log(url);
+
   useEffect(() => {
     fetch(`${url}/commands`)
       .then((res) => res.json())
