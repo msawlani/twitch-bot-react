@@ -57,7 +57,7 @@ const Home = () => {
         <NavBar userData={userData} />
         <div className="col">
           <h1 className="text-center">Twitch Chat Bot</h1>
-          <Outlet context={userData} />
+          <Outlet context={[userData, setUserData]} />
         </div>
       </div>
     </div>

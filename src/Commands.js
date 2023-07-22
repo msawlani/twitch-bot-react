@@ -4,13 +4,13 @@ import { config } from "./Constants";
 import EditCommand from "./EditCommand";
 import AddCommands from "./AddCommandModule";
 import { client } from "./bot";
+import { useOutletContext } from "react-router-dom";
 
 const url = config.url;
 
 const Commands = () => {
   const [commands, setCommands] = useState([]);
-
-  console.log(url);
+  const [userData, setUserData] = useOutletContext();
 
   useEffect(() => {
     fetch(`${url}/commands`)
@@ -33,7 +33,7 @@ const Commands = () => {
     <div className="container bg-secondary">
       <div className="row">
         <div className="p-4 float-end">
-          <AddCommands />
+          <AddCommands userData={userData} />
         </div>
         <ul className="list-unstyled">
           {commands.map((command) => (
@@ -45,10 +45,15 @@ const Commands = () => {
               </div>
               <div className="col-12 col-sm-6">
                 <div className="d-flex justify-content-evenly">
-                  <EditCommand command={command}></EditCommand>
+                  <EditCommand
+                    command={command}
+                    userData={userData}
+                  ></EditCommand>
                   <Button
                     onClick={(e) => deleteCommand(e, command.command)}
-                    disabled={client.readyState() !== "OPEN"}
+                    disabled={
+                      userData?.login !== process.env.REACT_APP_TWITCH_USER
+                    }
                   >
                     Delete
                   </Button>
