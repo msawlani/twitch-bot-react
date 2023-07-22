@@ -1,7 +1,7 @@
 ---
 id: x99hb
 title: Chat
-file_version: 1.1.2
+file_version: 1.1.3
 app_version: 1.10.3
 ---
 
@@ -33,30 +33,55 @@ This code will handle chat useState which will store whatever messages come into
 22       };
 23     
 24       return (
-25         <div>
-26           <div className="chatWindow">
-27             {chat.map((msg, index) => (
-28               <div key={index}>
-29                 <strong style={{ color: msg.color }}>{msg.user}: </strong>
-30                 <span>{msg.text}</span>
-31               </div>
-32             ))}
-33           </div>
-34           <form onSubmit={sendMessage} hidden={client.readyState() !== "OPEN"}>
-35             <input
-36               type="text"
-37               placeholder="Type a message"
-38               value={messages}
-39               onChange={(e) => setMessages(e.target.value)}
-40             />
-41             <button type="submit">Send</button>
-42             <button onClick={clearChat} type="button">
-43               Clear
-44             </button>
-45           </form>
-46         </div>
-47       );
-48     };
+25         <div className="container">
+26           <div className="row">
+27             <div className="col-12 col-md-9">
+28               <iframe
+29                 src="https://player.twitch.tv/?channel=sinsofaninja&parent=ninjashideout-twitch-bot.onrender.com&autoplay=true&muted=true"
+30                 height="1000"
+31                 width="850"
+32                 frameborder="0"
+33                 scrolling="no"
+34                 allowfullscreen="true"
+35               ></iframe>
+36             </div>
+37     
+38             <div className="chatWindow col-12 col-md-3">
+39               {chat.map((msg, index) => (
+40                 <div key={index}>
+41                   <strong style={{ color: msg.color }}>{msg.user}: </strong>
+42                   <span>{msg.text}</span>
+43                 </div>
+44               ))}
+45               <form onSubmit={sendMessage} hidden={client.readyState() !== "OPEN"}>
+46                 <div className="form-group">
+47                   <input
+48                     className="form-control form-control-sm"
+49                     type="text"
+50                     placeholder="Type a message"
+51                     value={messages}
+52                     onChange={(e) => setMessages(e.target.value)}
+53                   />
+54                 </div>
+55     
+56                 <div className="d-flex justify-content-center">
+57                   <button className="btn btn-primary" type="submit">
+58                     Send
+59                   </button>
+60                   <button
+61                     className="btn btn-danger"
+62                     onClick={clearChat}
+63                     type="button"
+64                   >
+65                     Clear
+66                   </button>
+67                 </div>
+68               </form>
+69             </div>
+70           </div>
+71         </div>
+72       );
+73     };
 ```
 
 <br/>
@@ -85,28 +110,40 @@ This code snip handles the messages being displayed from useState chat and sendi
 <!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
 ### 📄 src/Chat.js
 ```javascript
-25         <div>
-26           <div className="chatWindow">
-27             {chat.map((msg, index) => (
-28               <div key={index}>
-29                 <strong style={{ color: msg.color }}>{msg.user}: </strong>
-30                 <span>{msg.text}</span>
-31               </div>
-32             ))}
-33           </div>
-34           <form onSubmit={sendMessage} hidden={client.readyState() !== "OPEN"}>
-35             <input
-36               type="text"
-37               placeholder="Type a message"
-38               value={messages}
-39               onChange={(e) => setMessages(e.target.value)}
-40             />
-41             <button type="submit">Send</button>
-42             <button onClick={clearChat} type="button">
-43               Clear
-44             </button>
-45           </form>
-46         </div>
+36             </div>
+37     
+38             <div className="chatWindow col-12 col-md-3">
+39               {chat.map((msg, index) => (
+40                 <div key={index}>
+41                   <strong style={{ color: msg.color }}>{msg.user}: </strong>
+42                   <span>{msg.text}</span>
+43                 </div>
+44               ))}
+45               <form onSubmit={sendMessage} hidden={client.readyState() !== "OPEN"}>
+46                 <div className="form-group">
+47                   <input
+48                     className="form-control form-control-sm"
+49                     type="text"
+50                     placeholder="Type a message"
+51                     value={messages}
+52                     onChange={(e) => setMessages(e.target.value)}
+53                   />
+54                 </div>
+55     
+56                 <div className="d-flex justify-content-center">
+57                   <button className="btn btn-primary" type="submit">
+58                     Send
+59                   </button>
+60                   <button
+61                     className="btn btn-danger"
+62                     onClick={clearChat}
+63                     type="button"
+64                   >
+65                     Clear
+66                   </button>
+67                 </div>
+68               </form>
+69             </div>
 ```
 
 <br/>
