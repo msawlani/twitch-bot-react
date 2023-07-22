@@ -12,7 +12,7 @@ const NavBar = ({ userData }) => {
       .substring(2, length + 2);
   }
   const clientId = process.env.REACT_APP_STREAMER_CLIENT_ID;
-  const redirectUri = encodeURIComponent("http://localhost:3000");
+  const redirectUri = encodeURIComponent(process.env.REACT_APP_REDIRECT_URI);
   const responseType = "token";
   const scope = "user%3Aread%3Aemail+chat%3Aedit+chat%3Aread";
   const state = encodeURIComponent(generateRandomString(10));
@@ -24,6 +24,8 @@ const NavBar = ({ userData }) => {
   const handleClick = () => {
     redirectToTwitchAuth();
   };
+
+  console.log(userData);
 
   return (
     <nav className="d-flex flex-column flex-shrink-0 col-auto p-3 bg-dark vh-100 align-items-center ">

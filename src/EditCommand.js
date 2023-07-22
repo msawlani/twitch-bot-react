@@ -5,7 +5,7 @@ import { config } from "./Constants";
 
 const url = config.url;
 
-const Commands = (props) => {
+const Commands = ({ command, userData }) => {
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState({
     command: "",
@@ -18,10 +18,10 @@ const Commands = (props) => {
   const handleShow = () => {
     setEditing(true);
     setForm({
-      command: props.command.command,
-      modandup: props.command.modandup,
-      active: props.command.active,
-      message: props.command.message,
+      command: command.command,
+      modandup: command.modandup,
+      active: command.active,
+      message: command.message,
     });
   };
 
@@ -46,7 +46,10 @@ const Commands = (props) => {
 
   return (
     <>
-      <Button onClick={handleShow} disabled={client.readyState() !== "OPEN"}>
+      <Button
+        onClick={handleShow}
+        disabled={userData?.login !== process.env.REACT_APP_TWITCH_USER}
+      >
         Edit
       </Button>
       <Modal show={editing} onHide={handleClose}>

@@ -21,11 +21,14 @@ const Home = () => {
   }
 
   async function fetchUserInfo(accessToken) {
-    const response = await fetch("http://localhost:3001/api/users", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_FETCH_USER_URL}/api/users`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
 
     if (response.ok) {
       const data = await response.json();
@@ -41,6 +44,7 @@ const Home = () => {
     console.log(accessToken);
     if (accessToken) {
       fetchUserInfo(accessToken).then((userInfo) => {
+        console.log(userInfo);
         localStorage.setItem("userData", JSON.stringify(userInfo));
         console.log(userData);
       });
@@ -53,7 +57,7 @@ const Home = () => {
         <NavBar userData={userData} />
         <div className="col">
           <h1 className="text-center">Twitch Chat Bot</h1>
-          <Outlet context={userData} />
+          <Outlet context={[userData, setUserData]} />
         </div>
       </div>
     </div>

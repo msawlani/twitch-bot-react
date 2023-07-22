@@ -6,7 +6,7 @@ import { config } from "./Constants";
 
 const url = config.url;
 
-const AddCommands = () => {
+const AddCommands = ({ userData }) => {
   const [adding, setAdding] = useState(false);
   const messageRef = useRef();
   const commandRef = useRef();
@@ -43,7 +43,10 @@ const AddCommands = () => {
 
   return (
     <>
-      <Button onClick={handleShow} disabled={client.readyState() !== "OPEN"}>
+      <Button
+        onClick={handleShow}
+        disabled={userData?.login !== process.env.REACT_APP_TWITCH_USER}
+      >
         Add
       </Button>
       <Modal show={adding} onHide={handleClose}>

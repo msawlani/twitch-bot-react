@@ -26,7 +26,7 @@ const Chat = ({ chat, setChat, userData }) => {
       <div className="row">
         <div className="col-12 col-md-9">
           <iframe
-            src="https://player.twitch.tv/?channel=sinsofaninja&parent=localhost&autoplay=true&muted=true"
+            src="https://player.twitch.tv/?channel=sinsofaninja&parent=ninjashideout-twitch-bot.onrender.com&autoplay=true&muted=true"
             height="1000"
             width="850"
             frameborder="0"
