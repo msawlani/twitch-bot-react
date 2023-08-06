@@ -28,7 +28,7 @@ const NavBar = ({ userData }) => {
   console.log(userData);
 
   return (
-    <nav className="d-flex flex-column flex-shrink-0 col-auto p-3 bg-dark vh-100 align-items-center ">
+    <nav className="d-flex flex-column flex-shrink-0 col-auto p-3 bg-dark align-items-center ">
       <div>
         <img src={userData?.profile_image_url} className="profileImg" />
         <span className="ms-1 d-none d-sm-inline">
