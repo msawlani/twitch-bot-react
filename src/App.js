@@ -18,9 +18,6 @@ const App = () => {
   const [chat, setChat] = useState([]);
   const savedChat = localStorage.getItem("chat");
   console.log(userData);
-  const clearChat = () => {
-    setChat([]);
-  };
   useEffect(() => {
     if (savedChat) {
       setChat(JSON.parse(savedChat));
@@ -33,11 +30,10 @@ const App = () => {
         text: msg,
         color,
       };
-      setChat((prevChat) => {
-        const updatedChat = [...prevChat, newChat];
-        localStorage.setItem("chat", JSON.stringify(updatedChat));
-        return updatedChat;
-      });
+      setChat((prevChat) => [...prevChat, newChat]);
+
+      const updatedChat = [...chat, newChat];
+      localStorage.setItem("chat", JSON.stringify(updatedChat));
 
       console.log(savedChat);
     });
