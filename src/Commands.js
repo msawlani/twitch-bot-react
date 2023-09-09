@@ -30,8 +30,8 @@ const Commands = () => {
   }
 
   return (
-    <div className="container bg-secondary">
-      <div className="row">
+    <div className="container d-flex flex-column bg-dark">
+      <div className="row p-5 flex-grow-1 overflow-auto chat">
         <div className="p-4 float-end">
           <AddCommands userData={userData} />
         </div>
