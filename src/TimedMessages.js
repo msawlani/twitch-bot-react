@@ -30,22 +30,22 @@ const TimedMessages = () => {
   }
 
   return (
-    <div className="container bg-secondary">
-      <div className="row p-5">
-        <div className="col-sm-6">
+    <div className="container d-flex flex-column bg-dark">
+      <div className="row p-5 flex-grow-1 overflow-auto chat">
+        <div className="col-sm-12">
           <div className="float-right">
             <AddTimedMessages userData={userData} />
           </div>
 
           <ul className="list-unstyled">
             {timedMessages.map((timedMessage) => (
-              <div className="row p-1">
-                <div className="col-12 col-sm-6">
+              <div className="row pt-3">
+                <div className="col-12 col-sm-10">
                   <li>
                     {timedMessage.name} | {timedMessage.message}
                   </li>
                 </div>
-                <div className="col-12 col-sm-6">
+                <div className="col-12 col-sm-2">
                   <div className="d-flex justify-content-evenly">
                     <Button
                       onClick={(e) => Delete(e, timedMessage.name)}
