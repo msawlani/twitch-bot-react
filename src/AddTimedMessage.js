@@ -6,39 +6,42 @@ import { config } from "./Constants";
 
 const url = config.url;
 
-const AddCommands = ({ userData }) => {
+const AddTimedMessages = ({ userData }) => {
   const [adding, setAdding] = useState(false);
   const messageRef = useRef();
-  const commandRef = useRef();
-  const modandupRef = useRef(false);
+  const timedMessagesRef = useRef();
+  const timeRef = useRef();
+  const linesRef = useRef();
+  const remainingRef = useRef();
 
   const handleClose = () => setAdding(false);
   const handleShow = () => {
     setAdding(true);
   };
 
-  async function onSubmit() {
-    const command = {
-      command: commandRef.current.value,
-      modandup: modandupRef.current.checked,
-      active: true,
+  // This function will handle the submission.
+  async function onSubmit(e) {
+    e.preventDefault();
+    console.log("submitted");
+    const timedMessage = {
+      name: timedMessagesRef.current.value,
+      time: timeRef.current.value,
       message: messageRef.current.value,
+      lines: linesRef.current.value,
     };
     // When a post request is sent to the create url, we'll add a new record to the database.
 
-    await fetch(`${url}/commands`, {
+    await fetch(`${url}/timedMessages`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(command),
+      body: JSON.stringify(timedMessage),
     }).catch((error) => {
       window.alert(error);
       return;
     });
-    client.say("sinsofaninja", command.command + " command has been added!");
-    setAdding(false);
-    console.log(command);
+    console.log(timedMessage);
   }
 
   return (
@@ -54,24 +57,34 @@ const AddCommands = ({ userData }) => {
           <Modal.Title>Create Command</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form id="addForm" onSubmit={onSubmit}>
+          <Form onSubmit={onSubmit}>
             <FormControl
               placeholder="Name"
               type="text"
-              ref={commandRef}
-            ></FormControl>
-            <FormCheck
-              type="checkbox"
-              label="Mod & Up"
-              ref={modandupRef}
-            ></FormCheck>
-            <FormControl placeholder="Cooldown in seconds"></FormControl>
+              ref={timedMessagesRef}
+            />
+            <FormControl
+              placeholder="Time it takes for message to appear in seconds"
+              type="text"
+              ref={timeRef}
+            />
+            <FormControl
+              placeholder="Number of chat lines it takes for message to appear"
+              type="text"
+              ref={linesRef}
+            />
             <FormControl
               as="textarea"
               placeholder="Message"
               type="text"
               ref={messageRef}
-            ></FormControl>
+            />
+            <Button
+              type="submit"
+              disabled={userData?.login !== process.env.REACT_APP_TWITCH_USER}
+            >
+              Save
+            </Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -84,4 +97,4 @@ const AddCommands = ({ userData }) => {
   );
 };
 
-export default AddCommands;
+export default AddTimedMessages;
