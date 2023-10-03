@@ -1,5 +1,5 @@
 const prod = {
-  url: "https://ninjashideoutserver.onrender.com",
+  url: "http://localhost:3001",
 };
 
 const dev = {
