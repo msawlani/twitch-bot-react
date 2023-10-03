@@ -30,10 +30,12 @@ const App = () => {
         text: msg,
         color,
       };
-      setChat((prevChat) => [...prevChat, newChat]);
 
-      const updatedChat = [...chat, newChat];
-      localStorage.setItem("chat", JSON.stringify(updatedChat));
+      setChat((prevChat) => {
+        const updatedChat = [...prevChat, newChat];
+        localStorage.setItem("chat", JSON.stringify(updatedChat));
+        return updatedChat;
+      });
 
       console.log(savedChat);
     });
