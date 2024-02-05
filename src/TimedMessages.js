@@ -38,27 +38,31 @@ const TimedMessages = () => {
           </div>
 
           <ul className="list-unstyled">
-            {timedMessages.map((timedMessage) => (
-              <div className="row pt-3">
-                <div className="col-12 col-sm-10">
-                  <li>
-                    {timedMessage.name} | {timedMessage.message}
-                  </li>
-                </div>
-                <div className="col-12 col-sm-2">
-                  <div className="d-flex justify-content-evenly">
-                    <Button
-                      onClick={(e) => Delete(e, timedMessage.name)}
-                      disabled={
-                        userData?.login !== process.env.REACT_APP_TWITCH_USER
-                      }
-                    >
-                      Delete
-                    </Button>
+            {timedMessages.length === 0 ? (
+              <div className="text-center fs-1">Bot is offline</div>
+            ) : (
+              timedMessages.map((timedMessage) => (
+                <div className="row pt-3">
+                  <div className="col-12 col-sm-10">
+                    <li>
+                      {timedMessage.name} | {timedMessage.message}
+                    </li>
+                  </div>
+                  <div className="col-12 col-sm-2">
+                    <div className="d-flex justify-content-evenly">
+                      <Button
+                        onClick={(e) => Delete(e, timedMessage.name)}
+                        disabled={
+                          userData?.login !== process.env.REACT_APP_TWITCH_USER
+                        }
+                      >
+                        Delete
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </ul>
         </div>
       </div>
